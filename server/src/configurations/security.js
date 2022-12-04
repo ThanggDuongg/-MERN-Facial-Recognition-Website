@@ -28,7 +28,7 @@ const generateRefreshToken = (email) => {
 		email
 	},
 	process.env.JWT_SECRET, {
-		expiresIn: '7d',
+		expiresIn: '30d',
 	});
 };
 

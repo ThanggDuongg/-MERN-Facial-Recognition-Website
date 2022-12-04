@@ -29,10 +29,10 @@ function Navbar() {
   const dispatch = useDispatch();
   // const [isLoggedin, setIsLoggedin] = useState(false);
   const { isLoggedIn } = useSelector(state => state.statusLogin);
-  //  const { isLogin, setIsLogin, data } = useContext(AppContext);
+  const { info } = useSelector(state => state.userInfor)
 
   useEffect(() => {
-    console.log(isLoggedIn);
+    console.log(info);
   }, [])
 
   const handleLogout = () => {
@@ -62,6 +62,7 @@ function Navbar() {
       {isLoggedIn && <NavLink to="/face-detect-realtime" style={({ isActive }) => isActive ? activeStyle : baseStyle}>Face Detect Realtime</NavLink>}
       {isLoggedIn && <NavLink to="/face-detect-image-multipeople" style={({ isActive }) => isActive ? activeStyle : baseStyle}>Face Detect Multi People</NavLink>}
       {isLoggedIn && <NavLink to="/tensorflow" style={({ isActive }) => isActive ? activeStyle : baseStyle}>Tensorflow Page</NavLink>}
+      {isLoggedIn && <NavLink to="/multiface-detection-image" style={({ isActive }) => isActive ? activeStyle : baseStyle}>Faces Detect Page</NavLink>}
       <Spacer />
       <Input w='370px' color="white" focusBorderColor="purple.500" borderColor='rgb(111, 111, 111)' borderRadius="lg" placeholder="🔍 Search find something ~~ " />
       <HStack gap={2}>
@@ -72,7 +73,7 @@ function Navbar() {
             <FaBars style={{ color: 'gray' }} />
           </MenuButton>
           <MenuList bg='rgb(15, 6, 23)' borderColor='rgb(29, 20, 37)' color='gray' borderRadius='lg' pr={4}>
-            <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FaRegUser />Account {true && '( ' + 'thangduc.duong14@gmail.com' + ' )'}</MenuItem>
+            <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FaRegUser />Account {true && '( ' + info.email + ' )'}</MenuItem>
             <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FiSettings />Settings</MenuItem>
             <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FiHelpCircle />Help Center</MenuItem>
             {isLoggedIn && <MenuItem onClick={handleLogout} fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><RiLogoutCircleRLine />Logout</MenuItem>}

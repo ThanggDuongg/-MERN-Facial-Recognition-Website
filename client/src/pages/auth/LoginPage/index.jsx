@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux'
 import { login } from "../../../app/userSlice";
 import { loginstatus } from "../../../app/statusLoginSlice";
 import { handleError } from "../../../utils";
+import { store } from "../../../app/userInforSlice";
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -86,6 +87,7 @@ function Login() {
       console.log(response)
       dispatch(login({ accessToken: response.data.data.accessToken, refreshToken: response.data.data.refreshToken }))
       dispatch(loginstatus());
+      dispatch(store(response.data.data))
       cookies.set("accessToken", response.data.data.accessToken, {
         path: '/',
         expires: nextYear,
@@ -127,6 +129,7 @@ function Login() {
       console.log('response: ', response);
       dispatch(login({ accessToken: response.data.accessToken, refreshToken: userData.payload.refreshToken }))
       dispatch(loginstatus());
+      dispatch(store(userData.payload))
       cookies.set("accessToken", response.data.accessToken, {
         path: '/',
         expires: nextYear,

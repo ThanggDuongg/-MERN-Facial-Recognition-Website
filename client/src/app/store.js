@@ -6,6 +6,7 @@ import storage from 'reduxjs-toolkit-persist/lib/storage'
 import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
 import userReducer from './userSlice';
 import statusLoginReducer from './statusLoginSlice';
+import userInforReducer from './userInforSlice';
 
 const persistConfig = {
   key: 'root',
@@ -15,7 +16,8 @@ const persistConfig = {
 
 const reducers = combineReducers({
   user: userReducer,
-  statusLogin: statusLoginReducer
+  statusLogin: statusLoginReducer,
+  userInfor: userInforReducer
 });
 
 const _persistedReducer = persistReducer(persistConfig, reducers);
