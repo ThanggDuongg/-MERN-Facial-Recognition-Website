@@ -73,7 +73,7 @@ function Navbar() {
             <FaBars style={{ color: 'gray' }} />
           </MenuButton>
           <MenuList bg='rgb(15, 6, 23)' borderColor='rgb(29, 20, 37)' color='gray' borderRadius='lg' pr={4}>
-            <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FaRegUser />Account {true && '( ' + info.email + ' )'}</MenuItem>
+            {isLoggedIn && <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FaRegUser />Account {true && '( ' + info.email + ' )'}</MenuItem>}
             <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FiSettings />Settings</MenuItem>
             <MenuItem fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><FiHelpCircle />Help Center</MenuItem>
             {isLoggedIn && <MenuItem onClick={handleLogout} fontWeight='bold' bg='rgb(29, 20, 37)' m={2} borderRadius='lg' gap={2}><RiLogoutCircleRLine />Logout</MenuItem>}

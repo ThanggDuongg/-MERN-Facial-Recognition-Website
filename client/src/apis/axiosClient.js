@@ -2,6 +2,10 @@ import axios from "axios";
 import queryString from "query-string";
 import Cookies from "universal-cookie";
 import { parse, stringify } from 'qs';
+import userApi from "./userApi";
+import store from "../app/store";
+import { login, logout } from "../app/userSlice";
+import { logoutstatus } from "../app/statusLoginSlice";
 
 const current = new Date();
 const nextYear = new Date();
@@ -42,55 +46,46 @@ axiosClient.interceptors.request.use(async (config) => {
   return config;
 });
 
-// let refreshing_token = null;
-
 axiosClient.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
-    // const config = error.config;
-    // if (error.response && error.response.status === 401 && !config._retry) {
-    //   config._retry = true;
-    //   try {
-    //     var authToken = cookies.get("authToken")
-    //       ? cookies.get("authToken")
-    //       : null;
-    //     // refreshing_token = refreshing_token ? refreshing_token : authApi.refreshToken(
-    //     //    authToken.refreshToken,
-    //     // );
-    //     // store
-    //     //   .dispatch(refreshToken(authToken.refreshToken))
-    //     //   .unwrap()
-    //     //   .then((res) => {
-    //     //     console.log(res);
-    //     //     cookies.set("authToken", JSON.stringify(res.authToken), {
-    //     //       path: "/",
-    //     //       expires: nextYear,
-    //     //     });
-    //     //     return axiosClient(config);
-    //     //   })
-    //     //   .catch((status) => {
-    //     //     if (status === 401) {
-    //     //       store.dispatch(logout());
-    //     //     }
-    //     //   });
-
-    //     // let res = await refreshing_token;
-    //     // refreshing_token = null;
-    //     // if (authToken_dispatch.authToken) {
-    //     //    // localStorage.setItem("authToken", JSON.stringify(res.data.data));
-
-    //     // } else {
-    //     //    // if unauthorize (401), refresh token is expired => logout
-    //     //    if () {
-    //     //       const logout = await authApi.logout();
-    //     //    }
-    //     // }
-    //   } catch (error) {
-    //     return Promise.reject(error);
-    //   }
-    // }
+    const config = error.config;
+    if (error.response && error.response.status === 401 && !config._retry) {
+      config._retry = true;
+      try {
+        var authToken = cookies.get("accessToken")
+          ? cookies.get("accessToken")
+          : null;
+        const refreshing_token = localStorage.getItem('refreshToken')
+        const response = await userApi.refreshToken({ token: refreshing_token });
+        cookies.remove('accessToken', { path: '/' })
+        cookies.set("accessToken", response.data.accessToken, {
+          path: '/',
+          expires: nextYear,
+        });
+        store.dispatch(login({ accessToken: response.data.accessToken, refreshToken: refreshing_token }))
+      } catch (error) {
+        store.dispatch(logout());
+        store.dispatch(logoutstatus())
+        cookies.remove("accessToken", {
+          path: '/',
+          maxAge: 0,
+        });
+        cookies.remove("role", {
+          path: '/',
+          maxAge: 0,
+        });
+        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('email')
+        localStorage.removeItem('fullname')
+        localStorage.removeItem('image')
+        localStorage.removeItem('id')
+        window.location.href = '/login';
+        return Promise.reject(error);
+      }
+    }
     return Promise.reject(error);
   },
 );
