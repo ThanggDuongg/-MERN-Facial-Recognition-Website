@@ -122,3 +122,7 @@ Install dependencies
 - Đăng ký, đăng nhập bằng mặt  
 - Nhận diện, vẽ mask, detect emotion từ url hoặc upload  
 
+## Phân công công việc
+- Nguyễn Hiếu Đan: Xử lý backend Nodejs, research train model Clarifai, tìm hiểu sử dụng Clarifai clientside và serverside  
+- Dương Đức Thắng: Research, implement auth với face, integrate API nhận diện Clarifai, research tensorflowjs, xử lý nhận diện hình ảnh webcam
+- Phan Thanh Tài: Hoàn thiện UI/interface, integrate API đăng nhập đăng kí, tìm hiểu train model face-api.js, xử lý hình ảnh nhận diện từ URL
