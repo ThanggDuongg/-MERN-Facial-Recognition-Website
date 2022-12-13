@@ -125,4 +125,17 @@ Install dependencies
 ## Phân công công việc
 - Nguyễn Hiếu Đan: Xử lý backend Nodejs, research train model Clarifai, tìm hiểu sử dụng Clarifai clientside và serverside  
 - Dương Đức Thắng: Research, implement auth với face, integrate API nhận diện Clarifai, research tensorflowjs, xử lý nhận diện hình ảnh webcam
-- Phan Thanh Tài: Hoàn thiện UI/interface, integrate API đăng nhập đăng kí, tìm hiểu train model face-api.js, xử lý hình ảnh nhận diện từ URL
+- Phan Thanh Tài: Hoàn thiện UI/interface, integrate API đăng nhập đăng kí, tìm hiểu train model face-api.js, xử lý hình ảnh nhận diện từ URL  
+
+## Một vài kết quả thu được  
+- Auth Face  
+![login](https://res.cloudinary.com/thangduong/image/upload/v1670891304/DEFAULT%20IMAGE/login_aiopnz.png)  
+
+- Clarifai
+![Clarifai](https://res.cloudinary.com/thangduong/image/upload/v1670891304/DEFAULT%20IMAGE/clarifai_q4a1r3.png)
+
+- Multiple Faces
+![Mul](https://res.cloudinary.com/thangduong/image/upload/v1670891305/DEFAULT%20IMAGE/multipeople1_j70mva.png)
+
+- Face api
+![fapi](https://res.cloudinary.com/thangduong/image/upload/v1670891304/DEFAULT%20IMAGE/faceapi_u2um0i.png)
